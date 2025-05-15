@@ -1,0 +1,34 @@
+services:
+  api:
+    container_name: api
+    build:
+      context: ../backend/api
+    environment:
+      - NODE_ENV=development
+    # env_file:
+    #   - ../backend/api/environnements/.env
+    volumes:
+      - ../backend/api:/usr/src/app
+    ports:
+      - 3001:3001
+    networks:
+      - reseau_projet
+
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "4200:4200"
+  #   volumes:
+  #     - ../frontend:/usr/src/app
+  #   networks:
+  #     - reseau_projet
+
+# Pour créer un network : docker network create "nom_du_reseau"
+networks:
+  reseau_projet:
+    driver: bridge
+    external: true
